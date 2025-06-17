@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-
+import os
 app = Flask(__name__)
 
 conversion_rates = {
@@ -28,6 +28,7 @@ def index():
             result = round(amount * rate, 2)
 
     return render_template('currency.html', result=result)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # ✅ this makes it work on Render
+    app.run(debug=True, host="0.0.0.0", port=port)
 
-if __name__ == '__main__':
-    app.run(debug=True,port=5002)
